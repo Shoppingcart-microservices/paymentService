@@ -20,4 +20,4 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
 server:
-  port: 8083
+  port: 8082
