@@ -1,13 +1,11 @@
 package com.microservices.paymentservice.controllers;
 
 import com.microservices.paymentservice.model.Payment;
+import com.microservices.paymentservice.model.PaymentResponse;
 import com.microservices.paymentservice.services.PaymentService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/payment")
@@ -18,6 +16,11 @@ public class PaymentController {
 
     public PaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;
+    }
+
+    @GetMapping("/order/{id}")
+    public ResponseEntity<PaymentResponse> getPaymentDetailsByOrderId(@PathVariable("id") long orderId) {
+        return ResponseEntity.ok(paymentService.getPaymentDetailsByOrderId(orderId));
     }
 
     @PostMapping
