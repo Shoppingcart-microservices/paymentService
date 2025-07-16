@@ -12,7 +12,6 @@ public class TransactionDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "TRANSACTION_ID")
     private long transactionId;
 
