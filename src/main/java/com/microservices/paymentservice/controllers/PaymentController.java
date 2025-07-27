@@ -5,6 +5,7 @@ import com.microservices.paymentservice.model.PaymentResponse;
 import com.microservices.paymentservice.services.PaymentService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,11 +19,13 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
+    @PreAuthorize("hasAnyRole('Admin', 'Customer')")
     @GetMapping("/order/{id}")
     public ResponseEntity<PaymentResponse> getPaymentDetailsByOrderId(@PathVariable("id") long orderId) {
         return ResponseEntity.ok(paymentService.getPaymentDetailsByOrderId(orderId));
     }
 
+    @PreAuthorize("hasAnyRole('Customer')")
     @PostMapping
     public ResponseEntity<Long> doPayment(@RequestBody Payment payment) {
         return ResponseEntity.ok(paymentService.doPayment(payment));
