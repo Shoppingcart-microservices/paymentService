@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: payment-service-app
-          image: konped/payment-service
+          image: IMAGE_URL/payment-service
           imagePullPolicy: Always
           ports:
             - containerPort: 8082
